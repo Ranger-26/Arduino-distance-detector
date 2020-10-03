@@ -32,6 +32,7 @@ void scan() {
 }
 
 long microsecondsToInches(long microseconds) {
+   //This function converts the ultrasonic distance to inches
    return microseconds / 74 / 2;
 }
 
