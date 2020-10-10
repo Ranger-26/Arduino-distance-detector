@@ -1,23 +1,20 @@
+#include <LiquidCrystal.h>//includes the library for the LCD
+
 const int distance = 10;//ONLY CHANGE THIS NUMBER TO WHAT DISTANCE YOU WANT THE SENSOR TO DETECT OBJECTS(in inches)
 
 const int pingPin = 6; // Trigger Pin of Ultrasonic Sensor
 const int echoPin = 7; // Echo Pin of Ultrasonic Sensor
 const int buzzerPin = 9;//buzzer pin
 
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);//initializes the LCD
 
 void setup() {
   pinMode(buzzerPin, OUTPUT);//sets up buzzer pin
   pinMode(pingPin, OUTPUT);//sets up trigger pin of the sensor
   pinMode(echoPin, INPUT);//echo pin of the ultrasonic sensor
+  lcd.print("Welcome!");
+  delay(1000);
 }
-
-
-
-
-
-
-
-
 
 void loop() {
    scan();//runs the scan function
@@ -25,14 +22,17 @@ void loop() {
 
 void scan() {
    //This function will scan the area for objects withn a certain distance of a sensor and beep. Code from https://www.tutorialspoint.com/arduino/arduino_ultrasonic_sensor.htm for this function and the one after it.
+   lcd.clear();//clears the LCD
    long duration, inches, cm;//defines the length, inches, centimeters
    digitalWrite(pingPin, HIGH);//starts emitting the wave
    delayMicroseconds(10);//wait
    digitalWrite(pingPin, LOW);//stops emitting the wave
    duration = pulseIn(echoPin, HIGH);//recives the wave back and gets a value
    inches = microsecondsToInches(duration);//converts the value above into inches
+   lcd.print(inches);//prints distance to the LCD
    if(inches<=distance){
     buzz();//if the distance is less than a certain  number, buzz
+    lcd.print(inches);//prints distance to the LCD
    }
    delay(100);//wait
 }
