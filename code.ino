@@ -17,29 +17,14 @@ void setup() {
 }
 
 void loop() {
-   scan();//runs the scan function
-}
-
-void scan() {
    //This function will scan the area for objects withn a certain distance of a sensor and beep. Code from https://www.tutorialspoint.com/arduino/arduino_ultrasonic_sensor.htm for this function and the one after it.
    lcd.clear();//clears the LCD
-   long duration, inches, cm;//defines the length, inches, centimeters
-   digitalWrite(pingPin, HIGH);//starts emitting the wave
-   delayMicroseconds(10);//wait
-   digitalWrite(pingPin, LOW);//stops emitting the wave
-   duration = pulseIn(echoPin, HIGH);//recives the wave back and gets a value
-   inches = microsecondsToInches(duration);//converts the value above into inches
-   lcd.print(inches);//prints distance to the LCD
+   float inches = detectDistance();//converts the value above into inches
+   lcd.print(-inches);//prints distance to the LCD
    if(inches<=distance){
     buzz();//if the distance is less than a certain  number, buzz
-    lcd.print(inches);//prints distance to the LCD
    }
-   delay(100);//wait
-}
-
-long microsecondsToInches(long microseconds) {
-   //converts a value recived by the ultrasonic sensor into inches
-   return microseconds / 74 / 2;
+   delay(100);
 }
 
 void buzz(){
@@ -47,3 +32,12 @@ void buzz(){
   tone(buzzerPin, 1000, 500);//this function plays the sound,args:(buzzer pin, sound frequency, duration)
   delay(1000);//wait 1 second
 }
+float detectDistance(){
+   long duration;//defines the length, inches, centimeters
+   digitalWrite(pingPin, HIGH);//starts emitting the wave
+   delayMicroseconds(10);//wait
+   digitalWrite(pingPin, LOW);//stops emitting the wave
+   duration = pulseIn(echoPin, HIGH);//recives the wave back and gets a value
+   return duration / 74 / 2;//converts a value recived by the ultrasonic sensor into inches and returns it
+}
+
