@@ -22,7 +22,7 @@ void loop() {
    lcd.clear();//clears the LCD of the previous distance shown
    float inches = detectDistance();//calls the detect distance function to get the distance which will be a decimal
    lcd.print(int(inches));//prints distance to the LCD as an integer
-   if(inches<=distance)//checks if the distance is less than the proximity distance defined in line 8{
+   if(inches<=distance){//checks if the distance is less than the proximity distance defined in line 8{
     buzz();//if the distance is less than a certain  number, buzz
    }
    delay(100);//waits .1 of a second
