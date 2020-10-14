@@ -13,8 +13,8 @@ void setup() {
   pinMode(buzzerPin, OUTPUT);//sets up buzzer pin
   pinMode(pingPin, OUTPUT);//sets up trigger pin of the ultrasonic sensor
   pinMode(echoPin, INPUT);//echo pin of the ultrasonic sensor
-  lcd.print("Welcome!")//displays "Welcome!" to the LCD ;
-  delay(1000)//waits one second;
+  lcd.print("Welcome!");//displays "Welcome!" to the LCD 
+  delay(1000);//waits one second
 }
 
 void loop() {
@@ -33,6 +33,7 @@ void buzz(){
   tone(buzzerPin, 1000, 500);//this function plays the sound,args:(buzzer pin, sound frequency, duration)
   delay(1000);//wait 1 second
 }
+
 float detectDistance(){
    long duration;//defines a variable which will hold the detected distance
    digitalWrite(pingPin, HIGH);//starts emitting the wave 
